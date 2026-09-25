@@ -3,6 +3,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
 const authRoutes = require('./Routes/authRoutes');
+const productRoutes = require('./Routes/productRoutes');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/auth', authRoutes)
+app.use('/api/products', productRoutes);
 app.use(notFound)
 app.use(errorHandler)
 module.exports = app;
