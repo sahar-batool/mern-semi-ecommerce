@@ -1,4 +1,4 @@
-const Product = require('../models/Product');
+const Product = require('../Models/Product');
 
 const getProducts = async (req, res) => {
   const page = Number(req.query.page) || 1;
@@ -111,6 +111,8 @@ const createProduct = async (req, res) => {
     message:"product delete successfully"
   });
 };
+
+
 
 
 
