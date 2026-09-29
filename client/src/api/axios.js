@@ -14,4 +14,19 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const hadToken = localStorage.getItem('token');
+
+    if (error.response?.status === 401 && hadToken) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/login';
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export default api;

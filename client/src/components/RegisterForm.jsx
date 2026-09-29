@@ -17,6 +17,22 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+  if (!name || !email || !password) {
+    setError('All fields are required');
+    return;
+  }
+
+ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   if (!emailRegex.test(email)) {
+    setError('Please enter a valid email address');
+    return;
+  }
+
+  if (password.length < 6) {
+    setError('Password must be at least 6 characters');
+    return;
+  }
     setLoading(true);
 
     try {
@@ -36,9 +52,10 @@ const RegisterForm = () => {
         placeholder="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        
       />
       <input
-        type="email"
+        type="text"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -48,9 +65,10 @@ const RegisterForm = () => {
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        
       />
 
-      <button type="submit">Register</button>
+      <button type="submit" disabled={loading}>{loading ? 'Registerning...' : 'Register'}</button>
 
       {loading && <LoadingIndicator />}
       <ErrorMessage message={error} />

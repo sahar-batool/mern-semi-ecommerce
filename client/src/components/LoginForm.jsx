@@ -16,6 +16,19 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    if (!email || !password) {
+    setError('Please fill required fields');
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   if (!emailRegex.test(email)) {
+    setError('Please enter a valid email address');
+    return;
+  }
+
+  
     setLoading(true);
 
     try {
@@ -31,10 +44,11 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="email"
+        type="text"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        
       />
       <input
         type="password"
@@ -42,7 +56,7 @@ const LoginForm = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit">Login</button>
+      <button type="submit" disabled = {loading}>{loading ? 'Logging in...' : 'Login'}</button>
 
       {loading && <LoadingIndicator />}
       <ErrorMessage message={error} />

@@ -51,6 +51,21 @@ const Admin = () => {
     setError('');
     setSuccess('');
 
+    if (!form.name || !form.description || !form.category) {
+      setError('Name, description, and category are required');
+      return;
+    }
+
+    if (form.price === '' || Number(form.price) < 0) {
+      setError('Price must be a valid number, 0 or higher');
+      return;
+    }
+
+    if (form.stock === '' || Number(form.stock) < 0) {
+      setError('Stock must be a valid number, 0 or higher');
+      return;
+    }
+
     const payload = {
       ...form,
       price: Number(form.price),
@@ -118,10 +133,10 @@ const Admin = () => {
       <form onSubmit={handleSubmit}>
         <input name="name" placeholder="Name" value={form.name} onChange={handleChange} />
         <input name="description" placeholder="Description" value={form.description} onChange={handleChange} />
-        <input name="price" type="number" placeholder="Price" value={form.price} onChange={handleChange} />
+        <input name="price" placeholder="Price" value={form.price} onChange={handleChange} />
         <input name="category" placeholder="Category" value={form.category} onChange={handleChange} />
         <input name="image" placeholder="Image URL" value={form.image} onChange={handleChange} />
-        <input name="stock" type="number" placeholder="Stock" value={form.stock} onChange={handleChange} />
+        <input name="stock" placeholder="Stock" value={form.stock} onChange={handleChange} />
 
         <button type="submit">{editingId ? 'Update' : 'Create'}</button>
         {editingId && (
