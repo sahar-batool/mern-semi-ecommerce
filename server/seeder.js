@@ -52,6 +52,38 @@ const seedData = async () => {
     image:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
     stock: 15,
   },
+{
+    name: 'Smart Watch',
+    description: 'Fitness tracking smart watch with heart rate monitor',
+    price: 6500,
+    category: 'Electronics',
+    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop',
+    stock: 25,
+  },
+  {
+    name: 'Bluetooth Speaker',
+    description: 'Portable waterproof speaker with deep bass',
+    price: 2800,
+    category: 'Electronics',
+    image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop',
+    stock: 40,
+  },
+  {
+    name: 'Denim Jacket',
+    description: 'Classic fit denim jacket for all seasons',
+    price: 3200,
+    category: 'Clothing',
+    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop',
+    stock: 18,
+  },
+  {
+    name: 'Leather Wallet',
+    description: 'Genuine leather bifold wallet with card slots',
+    price: 1500,
+    category: 'Accessories',
+    image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&h=400&fit=crop',
+    stock: 30,
+  },
   ]);
 
   console.log('Data seeded successfully');

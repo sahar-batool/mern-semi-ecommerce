@@ -69,6 +69,7 @@ const Products = () => {
         <option value="">All categories</option>
         <option value="Electronics">Electronics</option>
         <option value="Clothing">Clothing</option>
+         <option value="Accessories">Accessories</option>
       </select>
 
       <select value={sort} onChange={handleSortChange} className="filter-select">
