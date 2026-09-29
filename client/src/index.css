@@ -1,111 +1,476 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
+/* ===================================================
+   RESET & BASE STYLES — applies to the whole app
+=================================================== */
+* {
   margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+  padding: 0;
   box-sizing: border-box;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #1f2937;
+  line-height: 1.5;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
+ul {
+  list-style: none;
+}
+
+/* Shared page wrapper — used on every page to center content */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+/* ===================================================
+   NAVBAR — Navbar.jsx
+=================================================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e293b;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+}
+
+.navbar-brand {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #38bdf8;
+}
+
+.logout-btn {
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  padding: 0.4rem 0.9rem;
   border-radius: 4px;
-  color: var(--text-h);
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.logout-btn:hover {
+  background-color: #dc2626;
+}
+
+/* ===================================================
+   FOOTER — Footer.jsx
+=================================================== */
+.footer {
+  background-color: #1e293b;
+  color: #94a3b8;
+  text-align: center;
+  padding: 1.25rem;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+
+/* ===================================================
+   BUTTONS — used across LoginForm, RegisterForm, Admin, etc.
+=================================================== */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-primary:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: #e2e8f0;
+  color: #1f2937;
+}
+
+.btn-secondary:hover {
+  background-color: #cbd5e1;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+.btn-small {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+/* ===================================================
+   FORMS — LoginForm.jsx, RegisterForm.jsx, Profile.jsx, Admin.jsx
+=================================================== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 420px;
+}
+
+.form-input {
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: -0.4rem;
+}
+
+/* Auth pages (Login/Register) — Login.jsx, Register.jsx */
+.auth-page {
+  max-width: 420px;
+  margin: 2rem auto;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.auth-page h1 {
+  margin-bottom: 1.25rem;
+}
+
+.auth-switch {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.auth-switch a {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* ===================================================
+   MESSAGES — ErrorMessage.jsx, success text in forms
+=================================================== */
+.error-message {
+  color: #b91c1c;
+  background-color: #fee2e2;
+  padding: 0.6rem 0.9rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  color: #15803d;
+  background-color: #dcfce7;
+  padding: 0.6rem 0.9rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* ===================================================
+   LOADING INDICATOR — LoadingIndicator.jsx
+=================================================== */
+.loading {
+  text-align: center;
+  padding: 1.5rem;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* ===================================================
+   HOME PAGE — Home.jsx
+=================================================== */
+.home-hero {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 3rem 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.home-hero h1 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: #1e293b;
+}
+
+.home-hero p {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+/* ===================================================
+   PRODUCTS PAGE — Products.jsx
+=================================================== */
+.products-page h1 {
+  margin-bottom: 1.25rem;
+}
+
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-select {
+  padding: 0.6rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background-color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* ===================================================
+   PRODUCT GRID & CARD — ProductGrid.jsx, ProductCard.jsx
+=================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.product-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: block;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background-color: #f1f5f9;
+}
+
+.product-card-info {
+  padding: 0.9rem;
+}
+
+.product-card-name {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  color: #1e293b;
+}
+
+.product-card-price {
+  font-weight: bold;
+  color: #2563eb;
+}
+
+/* ===================================================
+   PRODUCT DETAILS PAGE — ProductDetails.jsx
+=================================================== */
+.product-details {
+  display: flex;
+  gap: 2rem;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.product-details-image {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.product-details-info {
+  flex: 1;
+  min-width: 220px;
+}
+
+.product-details-info h1 {
+  margin-bottom: 0.75rem;
+}
+
+.product-details-price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2563eb;
+  margin: 0.75rem 0;
+}
+
+/* ===================================================
+   PROFILE PAGE — Profile.jsx
+=================================================== */
+.profile-page {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+}
+
+.profile-info p {
+  margin-bottom: 0.5rem;
+  color: #475569;
+}
+
+.profile-form {
+  margin-top: 1.5rem;
+}
+
+/* ===================================================
+   ADMIN PAGE — Admin.jsx
+=================================================== */
+.admin-page h1 {
+  margin-bottom: 1.25rem;
+}
+
+.admin-form {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.admin-form-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.admin-product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 0.9rem 1.2rem;
+  border-radius: 6px;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-product-item-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ===================================================
+   RESPONSIVE — mobile screens
+=================================================== */
+@media (max-width: 640px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .navbar-links {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .product-details {
+    flex-direction: column;
+    padding: 1.25rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .admin-product-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ===================================================
+   NOT FOUND PAGE — NotFound.jsx
+=================================================== */
+.not-found {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 3rem 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.not-found h1 {
+  font-size: 3rem;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+
+.not-found p {
+  color: #64748b;
+  margin-bottom: 1.5rem;
 }

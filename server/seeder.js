@@ -25,7 +25,7 @@ const seedData = async () => {
     description: 'Comfortable over-ear wireless headphones with noise cancellation',
     price: 5000,
     category: 'Electronics',
-    image: 'https://via.placeholder.com/300x300?text=Headphones',
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
     stock: 20,
   },
   {
@@ -33,7 +33,7 @@ const seedData = async () => {
     description: 'Adjustable aluminum stand for phones and tablets',
     price: 1200,
     category: 'Electronics',
-    image: 'https://via.placeholder.com/300x300?text=Phone+Stand',
+    image: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=400&h=400&fit=crop',
     stock: 35,
   },
   {
@@ -41,7 +41,7 @@ const seedData = async () => {
     description: 'Soft, breathable cotton t-shirt, unisex fit',
     price: 800,
     category: 'Clothing',
-    image: 'https://via.placeholder.com/300x300?text=T-Shirt',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop',
     stock: 50,
   },
   {
@@ -49,7 +49,7 @@ const seedData = async () => {
     description: 'Lightweight running shoes with cushioned sole',
     price: 3500,
     category: 'Clothing',
-    image: 'https://via.placeholder.com/300x300?text=Shoes',
+    image:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
     stock: 15,
   },
   ]);

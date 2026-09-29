@@ -42,12 +42,13 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='form'>
       <input
         type="text"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        className='form-input'
         
       />
       <input
@@ -55,8 +56,9 @@ const LoginForm = () => {
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        className='form-input'
       />
-      <button type="submit" disabled = {loading}>{loading ? 'Logging in...' : 'Login'}</button>
+      <button type="submit" className="btn btn-primary" disabled = {loading}>{loading ? 'Logging in...' : 'Login'}</button>
 
       {loading && <LoadingIndicator />}
       <ErrorMessage message={error} />

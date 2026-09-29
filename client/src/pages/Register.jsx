@@ -3,12 +3,14 @@ import RegisterForm from '../components/RegisterForm';
 
 const Register = () => {
   return (
-    <div>
-      <h1>Register</h1>
-      <RegisterForm />
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+    <div className="container">
+      <div className="auth-page">
+        <h1>Register</h1>
+        <RegisterForm />
+        <p className="auth-switch">
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+      </div>
     </div>
   );
 };

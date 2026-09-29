@@ -40,16 +40,23 @@ const ProductDetails = () => {
   }
 
   return (
-    <div>
-      <Link to="/products">Back to products</Link>
+    <div className="container">
+  <Link to="/products" className="btn btn-secondary" style={{ marginBottom: '1rem', display: 'inline-block' }}>
+    Back to products
+  </Link>
 
-      {product.image && <img src={product.image} alt={product.name} />}
+  <div className="product-details">
+    {product.image && <img className="product-details-image" src={product.image} alt={product.name} />}
+    <div className="product-details-info">
       <h1>{product.name}</h1>
       <p>{product.description}</p>
-      <p>Rs. {product.price}</p>
+      <p className="product-details-price">Rs. {product.price}</p>
       <p>Category: {product.category}</p>
       <p>{product.stock > 0 ? `In stock: ${product.stock}` : 'Out of stock'}</p>
     </div>
+  </div>
+</div>
+ 
   );
 };
 

@@ -49,30 +49,41 @@ const Profile = () => {
 
   if (loading) return <LoadingIndicator />;
 
-  if (!profile) return <ErrorMessage message={error || 'Profile not found'} />;
+  if (!profile) {
+    return (
+      <div className="container">
+        <ErrorMessage message={error || 'Profile not found'} />
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <h1>My Profile</h1>
+    <div className="container">
+      <div className="profile-page">
+        <h1>My Profile</h1>
 
-      <p>Email: {profile.email}</p>
-      <p>Role: {profile.role}</p>
+        <div className="profile-info">
+          <p>Email: {profile.email}</p>
+          <p>Role: {profile.role}</p>
+        </div>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button type="submit" disabled={saving}>
-          {saving ? 'Saving...' : 'Save changes'}
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="form profile-form">
+          <label htmlFor="name" className="form-label">Name</label>
+          <input
+            id="name"
+            type="text"
+            className="form-input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <button type="submit" className="btn btn-primary" disabled={saving}>
+            {saving ? 'Saving...' : 'Save changes'}
+          </button>
+        </form>
 
-      <ErrorMessage message={error} />
-      {success && <p style={{ color: 'green' }}>{success}</p>}
+        <ErrorMessage message={error} />
+        {success && <p className="success-message">{success}</p>}
+      </div>
     </div>
   );
 };

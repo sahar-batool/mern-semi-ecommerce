@@ -127,43 +127,47 @@ const Admin = () => {
   }
 
   return (
-    <div>
+    <div className="container admin-page">
       <h1>Product Management</h1>
 
-      <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} />
-        <input name="description" placeholder="Description" value={form.description} onChange={handleChange} />
-        <input name="price" placeholder="Price" value={form.price} onChange={handleChange} />
-        <input name="category" placeholder="Category" value={form.category} onChange={handleChange} />
-        <input name="image" placeholder="Image URL" value={form.image} onChange={handleChange} />
-        <input name="stock" placeholder="Stock" value={form.stock} onChange={handleChange} />
-
-        <button type="submit">{editingId ? 'Update' : 'Create'}</button>
+      <form onSubmit={handleSubmit} className="form admin-form">
+        <input className="form-input" name="name" placeholder="Name" value={form.name} onChange={handleChange} />
+        <input className="form-input" name="description" placeholder="Description" value={form.description} onChange={handleChange} />
+        <input className="form-input" name="price" placeholder="Price" value={form.price} onChange={handleChange} />
+        <input className="form-input" name="category" placeholder="Category" value={form.category} onChange={handleChange} />
+        <input className="form-input" name="image" placeholder="Image URL" value={form.image} onChange={handleChange} />
+        <input className="form-input" name="stock" placeholder="Stock" value={form.stock} onChange={handleChange} />
+        
+        <div className="admin-form-buttons">
+        <button className="btn btn-primary" type="submit">{editingId ? 'Update' : 'Create'}</button>
         {editingId && (
           <button type="button" onClick={handleCancel}>
             Cancel edit
           </button>
         )}
+         </div>
       </form>
 
       <ErrorMessage message={error} />
-      {success && <p style={{ color: 'green' }}>{success}</p>}
+      {success && <p className="success-message">{success}</p>}
 
       <h2>Products</h2>
       {loading ? (
         <LoadingIndicator />
       ) : (
-        <ul>
-          {products.map((product) => (
-            <li key={product._id}>
-              {product.name} - Rs. {product.price} - Stock: {product.stock}{' '}
-              <button onClick={() => handleEdit(product)}>Edit</button>
-              <button onClick={() => handleDelete(product._id)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      )}
+         <div className="admin-product-list">
+      {products.map((product) => (
+        <div key={product._id} className="admin-product-item">
+          <span>{product.name} - Rs. {product.price} - Stock: {product.stock}</span>
+          <div className="admin-product-item-actions">
+            <button onClick={() => handleEdit(product)} className="btn btn-secondary btn-small">Edit</button>
+            <button onClick={() => handleDelete(product._id)} className="btn btn-danger btn-small">Delete</button>
+          </div>
+        </div>
+      ))}
     </div>
+  )}
+</div>
   );
 };
 

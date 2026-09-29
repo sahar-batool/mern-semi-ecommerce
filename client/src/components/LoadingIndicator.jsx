@@ -1,5 +1,5 @@
 const LoadingIndicator = () => {
-  return <p>Loading...</p>;
+  return <p className="loading">Loading...</p>;
 };
 
 export default LoadingIndicator;

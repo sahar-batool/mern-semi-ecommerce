@@ -51,34 +51,38 @@ const Products = () => {
   };
 
   return (
-    <div>
+    <div className="container products-page">
       <h1>Products</h1>
-
-      <form onSubmit={handleSearch}>
+    <div className="filters-bar">
+      <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"
           placeholder="Search products"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
+          className='form-input'
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="btn btn-secondary">Search</button>
       </form>
 
-      <select value={category} onChange={handleCategoryChange}>
+      <select value={category} onChange={handleCategoryChange} className="filter-select">
         <option value="">All categories</option>
         <option value="Electronics">Electronics</option>
         <option value="Clothing">Clothing</option>
       </select>
 
-      <select value={sort} onChange={handleSortChange}>
+      <select value={sort} onChange={handleSortChange} className="filter-select">
         <option value="">Newest</option>
         <option value="oldest">Oldest</option>
         <option value="price_asc">Price: low to high</option>
         <option value="price_desc">Price: high to low</option>
       </select>
+      </div>
 
       <ErrorMessage message={error} />
+      {/* loading / grid / no results, unchanged */}
 
+    <div>
       {loading ? (
         <LoadingIndicator />
       ) : products.length === 0 ? (
@@ -86,16 +90,18 @@ const Products = () => {
       ) : (
         <ProductGrid products={products} />
       )}
+      
 
-      <div>
-        <button onClick={() => setPage(page - 1)} disabled={page <= 1}>
+      <div className="pagination">
+        <button onClick={() => setPage(page - 1)} disabled={page <= 1} className="btn btn-secondary" >
           Previous
         </button>
         <span> Page {page} of {totalPages || 1} </span>
-        <button onClick={() => setPage(page + 1)} disabled={page >= totalPages}>
+        <button onClick={() => setPage(page + 1)} disabled={page >= totalPages} className="btn btn-secondary" >
           Next
         </button>
       </div>
+    </div>
     </div>
   );
 };

@@ -46,12 +46,13 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='form'>
       <input
         type="text"
         placeholder="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        className='form-input'
         
       />
       <input
@@ -59,16 +60,18 @@ const RegisterForm = () => {
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        className='form-input'
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        className='form-input'
         
       />
 
-      <button type="submit" disabled={loading}>{loading ? 'Registerning...' : 'Register'}</button>
+      <button type="submit" className="btn btn-primary" disabled={loading}>{loading ? 'Registerning...' : 'Register'}</button>
 
       {loading && <LoadingIndicator />}
       <ErrorMessage message={error} />
