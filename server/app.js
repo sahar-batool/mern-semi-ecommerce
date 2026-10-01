@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.json({ success: true, message: 'API is running' });
 });
 
