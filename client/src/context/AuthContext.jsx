@@ -12,21 +12,41 @@ export const AuthProvider = ({ children }) => {
     const storedToken = localStorage.getItem('token');
 
     if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (err) {
+        console.error('Failed to parse stored user:', err);
+        localStorage.removeItem('user');
+      }
     }
 
     setLoading(false);
   }, []);
 
   const login = async (email, password) => {
-    const data = await loginApi(email, password);
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data.user));
-    setUser(data.user);
+    try {
+      const data = await loginApi(email, password);
+
+      // Guard check: Ensure data exists before accessing token/user
+      if (data && data.token) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        setUser(data.user);
+        return data;
+      }
+    } catch (error) {
+      console.error('AuthContext login error:', error);
+      // RE-THROW the error so LoginForm's try/catch receives it
+      throw error;
+    }
   };
 
   const register = async (name, email, password) => {
-    await registerApi(name, email, password);
+    try {
+      return await registerApi(name, email, password);
+    } catch (error) {
+      throw error;
+    }
   };
 
   const logout = () => {
@@ -36,9 +56,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const updateUser = (updatedUser) => {
-  localStorage.setItem('user', JSON.stringify(updatedUser));
-  setUser(updatedUser);
-};
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+    setUser(updatedUser);
+  };
 
   return (
     <AuthContext.Provider value={{ user, login, register, logout, updateUser, loading }}>
