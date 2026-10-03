@@ -4,9 +4,14 @@ const app = require('../server/app');
 let isConnected = false;
 
 module.exports = async (req, res) => {
-  if (!isConnected) {
-    await connectDB();
-    isConnected = true;
+  try {
+    if (!isConnected) {
+      await connectDB();
+      isConnected = true;
+    }
+    return app(req, res);
+  } catch (err) {
+    console.error('Serverless function error:', err);
+    res.status(500).json({ success: false, message: 'Server error' });
   }
-  return app(req, res);
 };
