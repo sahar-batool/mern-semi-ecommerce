@@ -3,6 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
 
+const cartRoutes = require('./Routes/cartRoutes');
 const authRoutes = require('./Routes/authRoutes');
 const productRoutes = require('./Routes/productRoutes');
 const userRoutes = require('./Routes/userRoutes');
@@ -40,6 +41,7 @@ app.get('/api', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
 
 // Error Handling
 app.use(notFound);

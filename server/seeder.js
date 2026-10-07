@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const User = require('./Models/User');
 const Product = require('./Models/Product');
 
@@ -10,7 +10,7 @@ const seedData = async () => {
   await User.deleteMany();
   await Product.deleteMany();
 
-  const hashedPassword = await bcrypt.hash('admin123', 10);
+  const hashedPassword = await bcrypt.hash('adminplm', 10);
 
   await User.create({
     name: 'Admin User',
