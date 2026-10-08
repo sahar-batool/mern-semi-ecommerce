@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
 import NotFound from './pages/NotFound';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
           }
         />
         <Route path="*" element={<NotFound />} />
+      <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+
+
       </Routes>
       <Footer />
     </>
