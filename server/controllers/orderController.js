@@ -1,5 +1,5 @@
 // controllers/orderController.js
-const Cart = require('../models/Cart');
+const Cart = require('../Models/Cart');
 const Order = require('../Models/Order');
 
 // POST /api/orders

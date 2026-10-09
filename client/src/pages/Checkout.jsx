@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/cartContext';
 import { placeOrder } from '../api/orders';
 import ErrorMessage from '../components/ErrorMessage';
 

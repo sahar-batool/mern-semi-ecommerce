@@ -10,7 +10,7 @@ const seedData = async () => {
   await User.deleteMany();
   await Product.deleteMany();
 
-  const hashedPassword = await bcrypt.hash('adminplm', 10);
+  const hashedPassword = await bcrypt.hash('adminpass123', 10);
 
   await User.create({
     name: 'Admin User',

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/cartContext';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -20,7 +20,13 @@ const Navbar = () => {
             </Link>
             <Link to="/profile" className="nav-link">Profile</Link>
             {user.role === 'admin' && <Link to="/admin" className="nav-link">Admin</Link>}
+            {user.role === 'admin' && (
+  <>
+    <Link to="/admin/orders" className="nav-link">All Orders</Link>
+  </>
+)}
             <button onClick={logout} className="logout-btn">Logout</button>
+            <Link to="/orders" className="nav-link">My Orders</Link>
           </>
         ) : (
           <>

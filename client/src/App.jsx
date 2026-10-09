@@ -14,6 +14,9 @@ import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import OrderConfirmation from './pages/OrderConfirmation';
+import MyOrders from './pages/MyOrders';
+import AdminOrders from './pages/AdminOrders';
+
 
 function App() {
   return (
@@ -50,6 +53,11 @@ function App() {
        
        <Route path="/order-confirmation/:id" element
        ={<ProtectedRoute><OrderConfirmation /></ProtectedRoute>} />
+
+       <Route path="/orders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
+
+       <Route path="/admin/orders" element={<ProtectedRoute><AdminOrders /></ProtectedRoute>} />
+
       </Routes>
       <Footer />
     </>
