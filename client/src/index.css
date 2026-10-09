@@ -209,6 +209,13 @@ ul {
   color: #2563eb;
   font-weight: 600;
 }
+.checkout-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; }
+.checkout-form { display: flex; flex-direction: column; gap: 0.75rem; max-width: 420px; margin-top: 1.5rem; }
+.checkout-form input { padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 6px; }
+
+/* order confirmation page */
+.confirmation-address { margin-top: 1.5rem; }
+.confirmation-links { display: flex; gap: 1rem; margin-top: 1.5rem; }
 
 /* ===================================================
    MESSAGES — ErrorMessage.jsx, success text in forms
