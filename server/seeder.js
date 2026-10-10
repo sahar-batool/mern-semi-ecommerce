@@ -93,9 +93,9 @@ const seedData = async () => {
   { name: 'Steel Water Bottle', description: 'Insulated 750ml bottle, keeps drinks cold for 24 hours', price: 1100, category: 'Accessories', image: '', stock: 45 },
   { name: 'Ceramic Mug Set', description: 'Set of 4 glazed ceramic mugs, dishwasher safe', price: 1400, category: 'Home', image: '', stock: 28 },
   { name: 'LED Table Lamp', description: 'Dimmable desk lamp with three brightness levels', price: 2800, category: 'Home', image: '', stock: 22 },
-  { name: 'Wall Clock', description: 'Silent quartz wall clock, minimalist design', price: 1600, category: 'Home', image: '', stock: 0 },
-];
-  ]);
+  { name: 'Wall Clock', description: 'Silent quartz wall clock, minimalist design', price: 1600, category: 'Home', image: '', stock: 0 }
+
+])
 
   console.log('Data seeded successfully');
   process.exit();
