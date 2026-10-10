@@ -1,7 +1,23 @@
-
+// controllers/orderController.js
 const Cart = require('../Models/Cart');
 const Order = require('../Models/Order');
+const Product = require('../Models/Product');
 
+// Subtract ordered quantities from product stock
+const reduceStock = async (items) => {
+  for (const item of items) {
+    await Product.updateOne({ _id: item.product }, { $inc: { stock: -item.quantity } });
+  }
+};
+
+// Give quantities back to product stock (used when an order is cancelled)
+const restoreStock = async (order) => {
+  for (const item of order.items) {
+    await Product.updateOne({ _id: item.product }, { $inc: { stock: item.quantity } });
+  }
+};
+
+// POST /api/orders
 const placeOrder = async (req, res, next) => {
   try {
     const cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
@@ -41,6 +57,9 @@ const placeOrder = async (req, res, next) => {
       shippingAddress: req.body?.shippingAddress,
       totalPrice,
     });
+
+    // Reduce stock after the order exists
+    await reduceStock(orderItems);
 
     // Clear the cart
     cart.items = [];
@@ -117,13 +136,14 @@ const updateOrderStatus = async (req, res, next) => {
     order.status = status;
     await order.save();
 
+    // Give the stock back if the admin cancels the order
+    if (status === 'cancelled') await restoreStock(order);
+
     res.json({ success: true, order });
   } catch (err) {
     next(err);
   }
 };
-
-// Add to controllers/orderController.js
 
 // PUT /api/orders/:id/cancel  (order owner)
 const cancelOrder = async (req, res, next) => {
@@ -145,10 +165,20 @@ const cancelOrder = async (req, res, next) => {
     order.status = 'cancelled';
     await order.save();
 
+    // Give the stock back
+    await restoreStock(order);
+
     res.json({ success: true, order });
   } catch (err) {
     next(err);
   }
 };
 
-module.exports = { placeOrder, getMyOrders, getOrderById, getAllOrders, updateOrderStatus, cancelOrder };
+module.exports = {
+  placeOrder,
+  getMyOrders,
+  getOrderById,
+  getAllOrders,
+  updateOrderStatus,
+  cancelOrder,
+};
