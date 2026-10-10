@@ -89,11 +89,11 @@ const seedData = async () => {
   { name: 'Mechanical Keyboard', description: 'Backlit keyboard with tactile blue switches', price: 6500, category: 'Electronics', image: 'https://images.unsplash.com/photo-1635987391914-cb84b567e68f?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D', stock: 12 },
   { name: 'Hooded Sweatshirt', description: 'Warm fleece hoodie with front pocket', price: 2600, category: 'Clothing', image: 'https://images.unsplash.com/photo-1680292783974-a9a336c10366?q=80&w=394&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D', stock: 28 },
   { name: 'Travel Backpack', description: 'Water-resistant 25L backpack with laptop compartment', price: 3900, category: 'Accessories', image: 'https://images.unsplash.com/photo-1771121664468-fc4832de5872?q=80&w=725&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D', stock: 24 },
-  { name: 'Sunglasses', description: 'UV400 polarized sunglasses with lightweight frame', price: 2200, category: 'Accessories', image: '', stock: 3 },
-  { name: 'Steel Water Bottle', description: 'Insulated 750ml bottle, keeps drinks cold for 24 hours', price: 1100, category: 'Accessories', image: '', stock: 45 },
-  { name: 'Ceramic Mug Set', description: 'Set of 4 glazed ceramic mugs, dishwasher safe', price: 1400, category: 'Home', image: '', stock: 28 },
-  { name: 'LED Table Lamp', description: 'Dimmable desk lamp with three brightness levels', price: 2800, category: 'Home', image: '', stock: 22 },
-  { name: 'Wall Clock', description: 'Silent quartz wall clock, minimalist design', price: 1600, category: 'Home', image: '', stock: 0 }
+  { name: 'Sunglasses', description: 'UV400 polarized sunglasses with lightweight frame', price: 2200, category: 'Accessories', image: 'https://images.unsplash.com/photo-1610136649349-0f646f318053?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D', stock: 3 },
+  { name: 'Steel Water Bottle', description: 'Insulated 750ml bottle, keeps drinks cold for 24 hours', price: 1100, category: 'Accessories', image: 'https://images.unsplash.com/photo-1683383277379-644816d886e2?q=80&w=327&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D', stock: 45 },
+  { name: 'Ceramic Mug Set', description: 'Set of 4 glazed ceramic mugs, dishwasher safe', price: 1400, category: 'Home', image: 'https://images.unsplash.com/photo-1724905136831-97fc0cd4760d?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D', stock: 28 },
+  { name: 'LED Table Lamp', description: 'Dimmable desk lamp with three brightness levels', price: 2800, category: 'Home', image: 'https://plus.unsplash.com/premium_photo-1672166939591-b2547bd18fca?q=80&w=327&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D', stock: 22 },
+  { name: 'Wall Clock', description: 'Silent quartz wall clock, minimalist design', price: 1600, category: 'Home', image: 'https://plus.unsplash.com/premium_photo-1725075084045-4c1ee2ab9349?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D', stock: 0 }
 
 ])
 
