@@ -1,7 +1,7 @@
 // src/pages/OrderConfirmation.jsx
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getOrderById } from '../api/orders';
+import { getOrderById, cancelOrder } from '../api/orders';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -10,6 +10,8 @@ const OrderConfirmation = () => {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [cancelling, setCancelling] = useState(false);
+  const [actionError, setActionError] = useState('');
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -29,6 +31,22 @@ const OrderConfirmation = () => {
     fetchOrder();
   }, [id]);
 
+  const handleCancel = async () => {
+    if (!window.confirm('Cancel this order?')) return;
+
+    setCancelling(true);
+    setActionError('');
+
+    try {
+      const data = await cancelOrder(order._id);
+      setOrder({ ...order, status: data.order.status });
+    } catch (err) {
+      setActionError(err.response?.data?.message || 'Failed to cancel order');
+    } finally {
+      setCancelling(false);
+    }
+  };
+
   if (loading) return <LoadingIndicator />;
 
   if (error) {
@@ -42,14 +60,18 @@ const OrderConfirmation = () => {
 
   return (
     <div className="container">
-      <h1>Thank you, your order was placed!</h1>
+      <h1>
+        {order.status === 'pending' ? 'Thank you, your order was placed!' : 'Order Details'}
+      </h1>
       <p>Order ID: {order._id}</p>
-      <p>Status: {order.status}</p>
+      <p>
+        Status: <span className={`status status-${order.status}`}>{order.status}</span>
+      </p>
 
       <div className="checkout-review">
         <h2>Items</h2>
-        {order.items.map((item) => (
-          <div className="checkout-item" key={item.product}>
+        {order.items.map((item, index) => (
+          <div className="checkout-item" key={`${item.product}-${index}`}>
             <span>{item.name} × {item.quantity}</span>
             <span>Rs. {item.price * item.quantity}</span>
           </div>
@@ -64,6 +86,14 @@ const OrderConfirmation = () => {
           <p>{order.shippingAddress.address}, {order.shippingAddress.city}</p>
           <p>{order.shippingAddress.phone}</p>
         </div>
+      )}
+
+      {actionError && <ErrorMessage message={actionError} />}
+
+      {order.status === 'pending' && (
+        <button className="btn btn-danger" onClick={handleCancel} disabled={cancelling}>
+          {cancelling ? 'Cancelling...' : 'Cancel Order'}
+        </button>
       )}
 
       <div className="confirmation-links">

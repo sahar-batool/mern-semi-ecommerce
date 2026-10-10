@@ -20,3 +20,14 @@ export const getAllOrders = async () => {
   const { data } = await api.get("/orders");
   return data;
 };
+
+export const updateOrderStatus = async (id, status) => {
+  const { data } = await api.put(`/orders/${id}/status`, { status });
+  return data;
+};
+
+
+export const cancelOrder = async (id) => {
+  const { data } = await api.put(`/orders/${id}/cancel`);
+  return data;
+};

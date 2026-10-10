@@ -43,9 +43,11 @@ const MyOrders = () => {
       <h1>My Orders</h1>
 
       {orders.length === 0 ? (
-        <div>
-          <p>You have no orders yet.</p>
-          <Link to="/products" className="btn btn-secondary">Browse products</Link>
+        <div className="empty-state">
+          <div className="empty-icon">📦</div>
+          <h2>No orders yet</h2>
+          <p>When you place an order, it will show up here.</p>
+          <Link to="/products" className="btn btn-primary">Browse products</Link>
         </div>
       ) : (
         <div className="orders-list">
@@ -53,14 +55,37 @@ const MyOrders = () => {
             const itemCount = order.items.reduce((sum, i) => sum + i.quantity, 0);
             return (
               <div className="order-card" key={order._id}>
-                <div className="order-card-info">
-                  <p><strong>Order #{order._id.slice(-6)}</strong></p>
-                  <p>{new Date(order.createdAt).toLocaleDateString()}</p>
-                  <p>Status: {order.status}</p>
-                  <p>{itemCount} item(s)</p>
+                <div className="order-card-header">
+                  <div>
+                    <p className="order-number">Order #{order._id.slice(-6)}</p>
+                    <p className="order-date">
+                      {new Date(order.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <span className={`status status-${order.status}`}>{order.status}</span>
                 </div>
-                <div className="order-card-side">
-                  <p className="order-card-total">Rs. {order.totalPrice}</p>
+
+                <div className="order-card-thumbs">
+                  {order.items.slice(0, 4).map((i, index) =>
+                    i.image ? (
+                      <img
+                        key={`${i.product}-${index}`}
+                        className="order-thumb"
+                        src={i.image}
+                        alt={i.name}
+                      />
+                    ) : null
+                  )}
+                  {order.items.length > 4 && (
+                    <span className="order-more">+{order.items.length - 4}</span>
+                  )}
+                </div>
+
+                <div className="order-card-footer">
+                  <div>
+                    <p className="order-items-count">{itemCount} item(s)</p>
+                    <p className="order-card-total">Rs. {order.totalPrice}</p>
+                  </div>
                   <Link to={`/order-confirmation/${order._id}`} className="btn btn-secondary">
                     View details
                   </Link>

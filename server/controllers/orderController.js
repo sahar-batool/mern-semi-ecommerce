@@ -1,8 +1,7 @@
-// controllers/orderController.js
+
 const Cart = require('../Models/Cart');
 const Order = require('../Models/Order');
 
-// POST /api/orders
 const placeOrder = async (req, res, next) => {
   try {
     const cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
@@ -95,4 +94,61 @@ const getAllOrders = async (req, res, next) => {
   }
 };
 
-module.exports = { placeOrder, getMyOrders, getOrderById, getAllOrders };
+// PUT /api/orders/:id/status  (admin)
+const updateOrderStatus = async (req, res, next) => {
+  try {
+    const { status } = req.body;
+    const allowed = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
+
+    if (!allowed.includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status' });
+    }
+
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+
+    if (['delivered', 'cancelled'].includes(order.status)) {
+      return res.status(400).json({ success: false, message: 'Order can no longer be changed' });
+    }
+
+    order.status = status;
+    await order.save();
+
+    res.json({ success: true, order });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Add to controllers/orderController.js
+
+// PUT /api/orders/:id/cancel  (order owner)
+const cancelOrder = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+
+    if (order.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ success: false, message: 'Not authorized to cancel this order' });
+    }
+
+    if (order.status !== 'pending') {
+      return res.status(400).json({ success: false, message: 'Only pending orders can be cancelled' });
+    }
+
+    order.status = 'cancelled';
+    await order.save();
+
+    res.json({ success: true, order });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { placeOrder, getMyOrders, getOrderById, getAllOrders, updateOrderStatus, cancelOrder };
