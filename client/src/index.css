@@ -896,3 +896,14 @@ ul {
 }
 
 
+.stars { display: inline-flex; align-items: center; }
+.star { color: #ccc; font-size: 1.2rem; background: none; border: none; padding: 0 2px; }
+.star.filled { color: #f5a623; }
+.stars.input .star { cursor: pointer; }
+.star-count { margin-left: 4px; font-size: 0.85rem; color: #666; }
+
+.review-form { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.review-form textarea { min-height: 80px; padding: 8px; }
+.review { border-bottom: 1px solid #eee; padding: 12px 0; }
+.review-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.review .error, .reviews .error { color: #c0392b; }

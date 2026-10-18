@@ -13,7 +13,7 @@ const { protect, admin } = require('../middlewares/authMiddleware');
 const router = express.Router();
 
 router.post('/', protect, placeOrder);
-router.get('/my', protect, getMyOrders);   // must be before '/:id'
+router.get('/my', protect, getMyOrders);  
 router.get('/', protect, admin, getAllOrders);
 router.get('/:id', protect, getOrderById);
 router.put('/:id/status', protect, admin, updateOrderStatus);

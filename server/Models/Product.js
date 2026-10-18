@@ -32,6 +32,14 @@ const productSchema = new mongoose.Schema(
       required: [true, 'Category is required'],
       trim: true,
     },
+    ratingsAverage: { 
+      type: Number,
+      default: 0 
+    },
+    ratingsCount: { 
+      type: Number,
+      default: 0 
+    },
   },
   { timestamps: true }
 );

@@ -8,6 +8,7 @@ const authRoutes = require('./Routes/authRoutes');
 const productRoutes = require('./Routes/productRoutes');
 const userRoutes = require('./Routes/userRoutes');
 const orderRoutes = require('./Routes/orderRoutes');
+const reviewRoutes = require('./Routes/reviewRoutes')
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes); 
+app.use("/api/reviews", reviewRoutes);
 
 // Error Handling
 app.use(notFound);

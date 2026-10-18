@@ -1,6 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/cartContext';
 import { useAuth } from '../context/AuthContext';
+import { StarDisplay } from "../components/Stars";
+
 
 const ProductCard = ({ product }) => {
   const { addItem } = useCart();
@@ -23,6 +25,7 @@ const ProductCard = ({ product }) => {
         )}
         <div className="product-card-info">
           <h3 className="product-card-name">{product.name}</h3>
+          <StarDisplay value={product.ratingsAverage} count={product.ratingsCount} />
           <p className="product-card-price">Rs. {product.price}</p>
         </div>
       </Link>
@@ -37,5 +40,7 @@ const ProductCard = ({ product }) => {
     </div>
   );
 };
+
+
 
 export default ProductCard;

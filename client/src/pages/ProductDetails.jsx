@@ -5,6 +5,8 @@ import { useCart } from '../context/cartContext';
 import { useAuth } from '../context/AuthContext';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ErrorMessage from '../components/ErrorMessage';
+import { StarDisplay } from "../components/Stars";
+import Reviews from "../components/Reviews";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -17,21 +19,23 @@ const ProductDetails = () => {
   const [error, setError] = useState('');
   const [quantity, setQuantity] = useState(1);
 
+  // CHANGED: moved out of useEffect, with a silent option
+  const fetchProduct = async (silent = false) => {
+    if (!silent) setLoading(true);
+    setError('');
+
+    try {
+      const data = await getProductById(id);
+      setProduct(data.product);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to load product');
+    } finally {
+      if (!silent) setLoading(false);
+    }
+  };
+
+  // CHANGED: just calls the function
   useEffect(() => {
-    const fetchProduct = async () => {
-      setLoading(true);
-      setError('');
-
-      try {
-        const data = await getProductById(id);
-        setProduct(data.product);
-      } catch (err) {
-        setError(err.response?.data?.message || 'Failed to load product');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchProduct();
   }, [id]);
 
@@ -75,6 +79,13 @@ const ProductDetails = () => {
         )}
         <div className="product-details-info">
           <h1>{product.name}</h1>
+
+          {/* NEW: average rating */}
+          <StarDisplay
+            value={product.ratingsAverage}
+            count={product.ratingsCount}
+          />
+
           <p>{product.description}</p>
           <p className="product-details-price">Rs. {product.price}</p>
           <p>Category: {product.category}</p>
@@ -100,6 +111,12 @@ const ProductDetails = () => {
           </button>
         </div>
       </div>
+
+      {/* NEW: reviews section, refreshes the product silently */}
+      <Reviews
+        productId={product._id}
+        onChange={() => fetchProduct(true)}
+      />
     </div>
   );
 };
