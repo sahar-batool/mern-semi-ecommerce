@@ -19,14 +19,11 @@ const Navbar = () => {
               {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
             </Link>
             <Link to="/profile" className="nav-link">Profile</Link>
-            {user.role === 'admin' && <Link to="/admin" className="nav-link">Admin</Link>}
-            {user.role === 'admin' && (
-  <>
-    <Link to="/admin/orders" className="nav-link">All Orders</Link>
-  </>
-)}
-            <button onClick={logout} className="logout-btn">Logout</button>
             <Link to="/orders" className="nav-link">My Orders</Link>
+            {user.role === 'admin' && (
+              <Link to="/admin/dashboard" className="nav-link">Admin</Link>
+            )}
+            <button onClick={logout} className="logout-btn">Logout</button>
           </>
         ) : (
           <>

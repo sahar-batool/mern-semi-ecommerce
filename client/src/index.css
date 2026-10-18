@@ -907,3 +907,24 @@ ul {
 .review { border-bottom: 1px solid #eee; padding: 12px 0; }
 .review-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .review .error, .reviews .error { color: #c0392b; }
+
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.stat-card { border: 1px solid #eee; border-radius: 8px; padding: 14px; }
+.stat-label { margin: 0; color: #666; font-size: 0.85rem; text-transform: capitalize; }
+.stat-value { margin: 4px 0 0; font-size: 1.4rem; font-weight: 600; }
+
+.sales-bars { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+.sales-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sales-date { width: 90px; font-size: 0.85rem; }
+.sales-bar-track { flex: 1; min-width: 120px; background: #f0f0f0; border-radius: 4px; height: 14px; }
+.sales-bar { background: #4a90e2; height: 100%; border-radius: 4px; }
+
+.dash-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+.dash-table th, .dash-table td { text-align: left; padding: 8px; border-bottom: 1px solid #eee; }
+.dash-table .out { color: #c0392b; font-weight: 600; }
+
+.admin-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.admin-link-card { display: block; border: 1px solid #eee; border-radius: 8px; padding: 16px; text-decoration: none; color: inherit; }
+.admin-link-card:hover { border-color: #4a90e2; }
+.admin-link-card h3 { margin: 0 0 4px; }
+.admin-link-card p { margin: 0; color: #666; font-size: 0.9rem; }

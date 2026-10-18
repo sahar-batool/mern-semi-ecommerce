@@ -16,7 +16,7 @@ import Checkout from './pages/Checkout';
 import OrderConfirmation from './pages/OrderConfirmation';
 import MyOrders from './pages/MyOrders';
 import AdminOrders from './pages/AdminOrders';
-
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -28,36 +28,18 @@ function App() {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <Admin />
-            </ProtectedRoute>
-          }
-        />
+
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+        <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+        <Route path="/order-confirmation/:id" element={<ProtectedRoute><OrderConfirmation /></ProtectedRoute>} />
+        <Route path="/orders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
+
+        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+        <Route path="/admin/orders" element={<ProtectedRoute><AdminOrders /></ProtectedRoute>} />
+        <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+
         <Route path="*" element={<NotFound />} />
-      <Route path="/cart" element=
-      {<ProtectedRoute><Cart /></ProtectedRoute>} />
-
-      <Route path="/checkout" element=
-      {<ProtectedRoute><Checkout /></ProtectedRoute>} />
-       
-       <Route path="/order-confirmation/:id" element
-       ={<ProtectedRoute><OrderConfirmation /></ProtectedRoute>} />
-
-       <Route path="/orders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
-
-       <Route path="/admin/orders" element={<ProtectedRoute><AdminOrders /></ProtectedRoute>} />
-
       </Routes>
       <Footer />
     </>
