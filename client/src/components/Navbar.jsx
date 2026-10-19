@@ -18,7 +18,6 @@ const Navbar = () => {
               🛒 Cart
               {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
             </Link>
-            <Link to="/profile" className="nav-link">Profile</Link>
             <Link to="/orders" className="nav-link">My Orders</Link>
             {user.role === 'admin' && (
               <Link to="/admin/dashboard" className="nav-link">Admin</Link>

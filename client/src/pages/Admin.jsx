@@ -8,6 +8,7 @@ import {
 } from '../api/products';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ErrorMessage from '../components/ErrorMessage';
+import ImageUpload from '../components/ImageUpload';
 
 const emptyForm = {
   name: '',
@@ -135,7 +136,10 @@ const Admin = () => {
         <input className="form-input" name="description" placeholder="Description" value={form.description} onChange={handleChange} />
         <input className="form-input" name="price" placeholder="Price" value={form.price} onChange={handleChange} />
         <input className="form-input" name="category" placeholder="Category" value={form.category} onChange={handleChange} />
-        <input className="form-input" name="image" placeholder="Image URL" value={form.image} onChange={handleChange} />
+        <ImageUpload
+  value={form.image}
+  onChange={(url) => setForm({ ...form, image: url })}
+/>
         <input className="form-input" name="stock" placeholder="Stock" value={form.stock} onChange={handleChange} />
         
         <div className="admin-form-buttons">
