@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import ErrorMessage from './ErrorMessage';
 import LoadingIndicator from './LoadingIndicator';
+
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -62,6 +63,7 @@ const LoginForm = () => {
 
       {loading && <LoadingIndicator />}
       <ErrorMessage message={error} />
+      <Link to="/forgot-password">Forgot password?</Link>
     </form>
   );
 };
