@@ -18,18 +18,21 @@ exports.getStats = async (req, res, next) => {
       totalProducts,
       lowStock,
     ] = await Promise.all([
+      // 1. Total revenue (paid orders only)
       Order.aggregate([
-        { $match: { status: { $ne: "cancelled" } } },
+        { $match: { isPaid: true } },
         { $group: { _id: null, total: { $sum: "$totalPrice" } } },
       ]),
 
+      // 2. Orders by status
       Order.aggregate([{ $group: { _id: "$status", count: { $sum: 1 } } }]),
 
+      // 3. Daily sales, last 7 days (by payment date)
       Order.aggregate([
-        { $match: { createdAt: { $gte: weekAgo }, status: { $ne: "cancelled" } } },
+        { $match: { paidAt: { $gte: weekAgo }, isPaid: true } },
         {
           $group: {
-            _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+            _id: { $dateToString: { format: "%Y-%m-%d", date: "$paidAt" } },
             sales: { $sum: "$totalPrice" },
             orders: { $sum: 1 },
           },
@@ -37,11 +40,13 @@ exports.getStats = async (req, res, next) => {
         { $sort: { _id: 1 } },
       ]),
 
+      // 4-7. Counts
       Order.countDocuments(),
       User.countDocuments(),
       User.countDocuments({ createdAt: { $gte: weekAgo } }),
       Product.countDocuments(),
 
+      // 8. Low stock
       Product.find({ stock: { $lte: LOW_STOCK_LIMIT } })
         .select("name stock image")
         .sort("stock")

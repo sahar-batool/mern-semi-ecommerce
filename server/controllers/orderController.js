@@ -56,6 +56,8 @@ const placeOrder = async (req, res, next) => {
       items: orderItems,
       shippingAddress: req.body?.shippingAddress,
       totalPrice,
+      paymentMethod: 'COD',
+     isPaid: false,
     });
 
     // Reduce stock after the order exists
@@ -134,6 +136,13 @@ const updateOrderStatus = async (req, res, next) => {
     }
 
     order.status = status;
+
+    
+
+    if (status === 'delivered') {
+  order.isPaid = true;
+  order.paidAt = Date.now();
+}
     await order.save();
 
     // Give the stock back if the admin cancels the order
@@ -143,6 +152,8 @@ const updateOrderStatus = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+
+ 
 };
 
 // PUT /api/orders/:id/cancel  (order owner)

@@ -948,3 +948,11 @@ ul {
 .auth-page .success { color: #1e8449; background: #eafaf1; padding: 10px; border-radius: 6px; }
 .auth-page .error { color: #c0392b; background: #fdedec; padding: 10px; border-radius: 6px; }
 .auth-page a { color: #4a90e2; }
+
+
+/* payment styling */
+.pay-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
+.pay-badge.paid { background: #eafaf1; color: #1e8449; }
+.pay-badge.unpaid { background: #fef5e7; color: #b9770e; }
+.pay-badge.cancelled { background: #f2f3f4; color: #666; }
+.payment-method { margin: 12px 0; }

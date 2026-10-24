@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { getAllOrders, updateOrderStatus } from '../api/orders';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ErrorMessage from '../components/ErrorMessage';
+import PaymentBadge from '../components/PaymentBadge'
 
 const STATUSES = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
 
@@ -58,6 +59,7 @@ const AdminOrders = () => {
       <h1>All Orders</h1>
 
       {actionError && <ErrorMessage message={actionError} />}
+      <p><small>Note: marking an order as Delivered also marks it as paid. Delivered and cancelled orders are locked.</small></p>
 
       {orders.length === 0 ? (
         <p>No orders yet.</p>
@@ -72,6 +74,7 @@ const AdminOrders = () => {
                 <th>Items</th>
                 <th>Total</th>
                 <th>Status</th>
+                <th>Payment</th>
               </tr>
             </thead>
             <tbody>
@@ -102,6 +105,7 @@ const AdminOrders = () => {
                         ))}
                       </select>
                     </td>
+                    <td><PaymentBadge order={order} /></td>
                   </tr>
                 );
               })}

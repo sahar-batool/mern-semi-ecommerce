@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getOrderById, cancelOrder } from '../api/orders';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ErrorMessage from '../components/ErrorMessage';
+import PaymentBadge from '../components/PaymentBadge';
 
 const OrderConfirmation = () => {
   const { id } = useParams();
@@ -95,6 +96,9 @@ const OrderConfirmation = () => {
           {cancelling ? 'Cancelling...' : 'Cancel Order'}
         </button>
       )}
+
+<p>Payment method: {order.paymentMethod === 'COD' ? 'Cash on Delivery' : order.paymentMethod}</p>
+<p>Payment: <PaymentBadge order={order} /></p>
 
       <div className="confirmation-links">
         <Link to="/orders" className="btn btn-primary">View my orders</Link>

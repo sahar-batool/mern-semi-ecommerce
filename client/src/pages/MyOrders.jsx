@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { getMyOrders } from '../api/orders';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ErrorMessage from '../components/ErrorMessage';
+import PaymentBadge from '../components/PaymentBadge';
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -64,6 +65,7 @@ const MyOrders = () => {
                   </div>
                   <span className={`status status-${order.status}`}>{order.status}</span>
                 </div>
+                <PaymentBadge order={order} />
 
                 <div className="order-card-thumbs">
                   {order.items.slice(0, 4).map((i, index) =>
